@@ -13,12 +13,9 @@ extra_compile_args = []
 if sys.platform != "win32":
     extra_compile_args = ["-fPIC", "-Wall"]
 
-Extension(
-    'parse_args',
-    'get_input',
-    'add_history',
-    'free_mem',
-    sources=['src/shellparser.c']
+shell_extension = Extension(
+    'shellparser',                # The name of the module
+    sources=['src/shellparser.c'] # The list of C files to compile
 )
 
 setup(
