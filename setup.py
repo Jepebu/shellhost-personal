@@ -13,6 +13,14 @@ extra_compile_args = []
 if sys.platform != "win32":
     extra_compile_args = ["-fPIC", "-Wall"]
 
+Extension(
+    'parse_args',
+    'get_input',
+    'add_history',
+    'free_mem',
+    sources=['src/shellparser.c']
+)
+
 setup(
     name="pyshell",
     version="1.0",
@@ -23,8 +31,4 @@ setup(
     url="...",
     license="...",
     packages=find_packages(),
-    package_data={
-        'pyshell': ['*.dll', '*.so', '*.dylib']
-    },
-    include_package_data=True,
 )
