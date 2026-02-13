@@ -25,8 +25,7 @@ setup(
     long_description="Provides an isolated interactive shell environment that you can import Python functions into as shell commands.",
     author="M. Bragg",
     author_email="mbragg@spear.ai",
-    url="...",
-    license="...",
+    url="github.com/mbragg-spear/pyshell",
     ext_modules=[shell_extension],
     packages=find_packages(),
 )
