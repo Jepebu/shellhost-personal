@@ -6,7 +6,7 @@ if not hasattr(configparser, 'SafeConfigParser'):
     configparser.SafeConfigParser = configparser.ConfigParser
 # -----------------------------------
 
-from setuptools import setup, find_packages
+from setuptools import setup, find_packages, Extension
 import sys
 
 extra_compile_args = []
