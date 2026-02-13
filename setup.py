@@ -6,22 +6,16 @@ if not hasattr(configparser, 'SafeConfigParser'):
     configparser.SafeConfigParser = configparser.ConfigParser
 # -----------------------------------
 
-from setuptools import setup, find_packages, Extension
+from setuptools import setup, find_packages
 import sys
 
 extra_compile_args = []
 if sys.platform != "win32":
     extra_compile_args = ["-fPIC", "-Wall"]
 
-module_c = Extension(
-    'shellparser',
-    sources=['src/shellparser.c']
-)
-
 setup(
     name="pyshell",
     version="1.0",
-    ext_modules=[module_c],
     description="Turn Python functions into interactive shell commands.",
     long_description="Provides an isolated interactive shell environment that you can import Python functions into as shell commands.",
     author="M. Bragg",
@@ -29,4 +23,8 @@ setup(
     url="...",
     license="...",
     packages=find_packages(),
+    package_data={
+        'pyshell': ['*.dll', '*.so', '*.dylib']
+    },
+    include_package_data=True,
 )
