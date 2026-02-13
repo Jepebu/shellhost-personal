@@ -1,4 +1,4 @@
-# pyshell __init__.py
+# shellhost __init__.py
 import platform
 import inspect
 import shellparser
@@ -7,26 +7,26 @@ import re
 
 """
 ┌───────────────────────────────────────┐
-│ ## pyshell ##                         │
-│ pyshell aims to provide a simpler     │
+│ ## shellhost ##                       │
+│ shellhost aims to provide a simpler   │
 │ interface to making command line      │
 │ shell-type apps in python.            │
 └───────────────────────────────────────┘
 """
 
-class PyShell:
+class Shell:
   """ Class Object for the actual shell environment.
 
   """
-  def __init__(self, name='pyshell', prompt='pyshell> '):
-    """ Initializes a new PyShell object.
+  def __init__(self, name='shell', prompt='shell> '):
+    """ Initializes a new Shell object.
 
     Args:
-      name: The string name for your shell. Default: pyshell (UNUSED)
-      prompt: The prompt that will be displayed on the command line. Default: 'pyshell> '
+      name: The string name for your shell. Default: shell (UNUSED)
+      prompt: The prompt that will be displayed on the command line. Default: 'shell> '
 
     Returns:
-      A new PyShell object.
+      A new Shell object.
     """
     self.name = name
     self.commands = {
@@ -115,7 +115,7 @@ class PyShell:
     """ Explicitly adds a command to the shell.
 
     Args:
-      command: The PyShell.Command object to add to the shell.
+      command: The Shell.Command object to add to the shell.
 
     Returns:
       None
@@ -238,7 +238,7 @@ class PyShell:
 
 class Command:
   def __init__(self, name, func):
-    """ Initializes a pyshell Command object.
+    """ Initializes a Shell Command object.
 
     Args:
       self: The Command object.
@@ -296,14 +296,14 @@ class Command:
 
   @classmethod
   def decorator(self, func):
-    """ Function decorator for creating a pyshell command from a python function.
+    """ Function decorator for creating a Shell command from a python function.
 
     Args:
       self: The Command class definition.
       func: The function to be decorated.
 
     Returns:
-      A pyshell Command object.
+      A Shell Command object.
     """
 
     this_command = self(func.__name__, func) # Create new Command object.
@@ -475,7 +475,7 @@ class Command:
 ### Mainguard to open a basic shell if called directly.
 if __name__ == "__main__":
 
-  myshell = PyShell()
+  myshell = Shell()
   myshell.open()
 
 

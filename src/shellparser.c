@@ -30,7 +30,6 @@ extern void add_history(const char* cmd);
 
 /* ==========================================
  * 2. PYTHON WRAPPERS
- * (Translators between Python <-> C)
  * ========================================== */
 
 // Wrapper for: int parse_args(...)
@@ -74,11 +73,9 @@ static PyObject* shellparser_get_input(PyObject *self, PyObject *args) {
   result = get_input(prompt);
 
   // Convert C String -> Python String
-  // (This COPIES the data into Python's memory)
   PyObject* py_result = PyUnicode_FromString(result);
 
-  // OPTIONAL: If get_input used malloc, we should free the C pointer 
-  // now because Python has its own copy.
+  // Python now has its own copy, so its safe to free() from here.
   free_mem(result);
 
   return py_result;
@@ -102,7 +99,7 @@ static PyObject* shellparser_add_history(PyObject *self, PyObject *args) {
 
 // Wrapper for: void free_mem(...)
 // Python usage: free_mem(123456)  <-- Takes an integer address
-// WARNING: Dangerous to use from Python manually!
+// Likely not needed anymore, but I'm not gonna trash it just yet.
 static PyObject* shellparser_free_mem(PyObject *self, PyObject *args) {
   unsigned long long ptr_addr;
 
@@ -116,7 +113,7 @@ static PyObject* shellparser_free_mem(PyObject *self, PyObject *args) {
 }
 
 /* ==========================================
- * 3. THE METHOD TABLE (The Menu)
+ * 3. THE METHOD TABLE
  * ========================================== */
 static PyMethodDef ShellParserMethods[] = {
   {"parse_args",  shellparser_parse_args,  METH_VARARGS, "Parse a command string into a list of arguments."},
@@ -128,7 +125,7 @@ static PyMethodDef ShellParserMethods[] = {
 
 
 /* ==========================================
- * 4. MODULE INITIALIZATION (The Gatekeeper)
+ * 4. MODULE INITIALIZATION
  * ========================================== */
 static struct PyModuleDef shellparser_module = {
   PyModuleDef_HEAD_INIT,
